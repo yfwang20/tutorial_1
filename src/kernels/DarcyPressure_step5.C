@@ -1,9 +1,9 @@
-#include "DarcyPressure.h"
+#include "DarcyPressure_step5.h"
 
-registerMooseObject("tutorial_1App", DarcyPressure);
+registerMooseObject("tutorial_1App", DarcyPressure_step5);
 
 InputParameters
-DarcyPressure::validParams()
+DarcyPressure_step5::validParams()
 {
   InputParameters params = ADKernelGrad::validParams();
   params.addClassDescription("Compute the diffusion term for Darcy pressure ($p$) equation: "
@@ -12,7 +12,7 @@ DarcyPressure::validParams()
   return params;
 }
 
-DarcyPressure::DarcyPressure(const InputParameters & parameters)
+DarcyPressure_step5::DarcyPressure_step5(const InputParameters & parameters)
   : ADKernelGrad(parameters),
 
     // Set the coefficients for the pressure kernel
@@ -22,7 +22,7 @@ DarcyPressure::DarcyPressure(const InputParameters & parameters)
 }
 
 ADRealVectorValue
-DarcyPressure::precomputeQpResidual()
+DarcyPressure_step5::precomputeQpResidual()
 {
   return (_permeability / _viscosity) * _grad_u[_qp];
 }
